@@ -1,0 +1,43 @@
+SELECT p.[ProductKey]
+      --,[ProductAlternateKey]
+	  ,p.[EnglishProductName] AS [Product Name]
+	  ,pc.EnglishProductCategoryName AS [Product Category]
+	  ,ps.EnglishProductSubcategoryName AS [Product Sub Category]
+	  ,p.[ProductSubcategoryKey] AS Sub_Category_Key
+      --,[WeightUnitMeasureCode]
+      --,[SizeUnitMeasureCode]
+      --,[SpanishProductName]
+      --,[FrenchProductName]
+      --,[StandardCost]
+      --,[FinishedGoodsFlag]
+      --,[Color]
+      --,[SafetyStockLevel]
+      --,[ReorderPoint]
+      ,p.[ListPrice]  As Price
+      --,[Size]
+      --,[SizeRange]
+      --,[Weight]
+      --,[DaysToManufacture]
+      --,[ProductLine]
+      --,[DealerPrice]
+      --,[Class]
+      --,[Style]
+      ,p.[ModelName] AS [Product Model]
+      --,[LargePhoto]
+      --,[EnglishDescription]
+      --,[FrenchDescription]
+      --,[ChineseDescription]
+      --,[ArabicDescription]
+      --,[HebrewDescription]
+      --,[ThaiDescription]
+      --,[GermanDescription]
+      --,[JapaneseDescription]
+      --,[TurkishDescription]
+      --,[StartDate]
+      --,[EndDate]
+      ,ISNULL(p.[Status], 'Outdated') as [Product Status]
+  FROM [AdventureWorksDW2019].[dbo].[DimProduct] p 
+  LEFT JOIN [AdventureWorksDW2019].[dbo].[DimProductSubcategory] ps ON p.ProductSubcategoryKey = ps.ProductSubcategoryKey
+  LEFT JOIN [AdventureWorksDW2019].[dbo].[DimProductCategory] pc ON ps.ProductCategoryKey = pc.ProductCategoryKey
+  order by p.ProductKey asc
+
